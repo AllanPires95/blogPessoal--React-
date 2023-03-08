@@ -1,0 +1,23 @@
+    import React from 'react' 
+    import {Button, Container, TextField, Typhography} from '@material-ui/core'
+
+
+function CadastroTema(){
+    <>
+    <Container>
+        <form>
+        <Typhography> Cadastre um tema </Typhography>
+        <TextField
+        name='descricao'
+        id='descricao'
+        label='Descricao do tema'
+        variant='outlined'
+        />
+
+        <Button variant='contained' type='submit' >Cadastrar</Button>
+        </form>
+        </Container>
+    </>
+
+}
+export default CadastroTema
