@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './CadastroUsuario.css'
 import Usuario from '../../models/Usuario';
 import { cadastro } from '../../services/Service';
-import './CadastroUsuario.css'
+
 
 
 function CadastroUsuario() {

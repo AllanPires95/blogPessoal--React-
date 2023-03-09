@@ -11,7 +11,7 @@ const initialState = {
 export const tokenReducer = (state: TokenState = initialState, action: Action) => {
     switch(action.type) {
         case "ADD_TOKEN": {
-            return{token: action}
+            return{token: action.payload}
         }
 
         default: return state

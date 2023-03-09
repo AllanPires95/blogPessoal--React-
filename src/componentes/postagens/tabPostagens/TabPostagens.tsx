@@ -7,6 +7,7 @@ import ListaTemas from '../../temas/listaTemas/ListaTemas';
 
 function TabPostagens() {
   const [value, setValue] = useState('1')
+  
     function handleChange(event: React.ChangeEvent<{}>, newValue: string){
         setValue(newValue);
     }

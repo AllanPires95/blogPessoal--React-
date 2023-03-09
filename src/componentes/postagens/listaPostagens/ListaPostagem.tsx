@@ -1,22 +1,25 @@
 import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaPostagem() {
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
-  const [token, setToken] = useLocalStorage('token')
+  let token = useSelector<TokenState, TokenState["token"]>(
+    (state) => state.token
+);
 
-  useEffect(() => {
+    useEffect(() => {
     if(token === ''){ 
       alert('Você precisa estar logado pra ficar aqui')
       navigate('/login')
     }
-  })
+  }, [token])
 
   const [postagens, setPostagens] = useState<Postagem[]>([])
 
@@ -80,4 +83,4 @@ function ListaPostagem() {
   )
 }
 
-export default ListaPostagem
+export default ListaPostagem  

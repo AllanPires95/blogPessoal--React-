@@ -1,41 +1,48 @@
 import React, {useState, useEffect} from 'react'
-import useLocalStorage from 'react-use-localstorage'
-import Tema from '../../../models/Tema'
-import { busca } from '../../../services/Service'
-import './ListaTemas.css'
-import { Link, useNavigate } from 'react-router-dom';
-import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
+import {Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import {Box} from '@mui/material';
+import Tema from '../../../models/Tema';
 
 
+import {useNavigate} from 'react-router-dom';
+import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaTemas() {
   const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token')
-  let navigate = useNavigate()
+  const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token
+  );
+  let navigate = useNavigate();
 
-  useEffect(() => {
-    if(token === '') {
-      alert('Você precisa estar logado pra ficar aqui.')
-      navigate('/login')
+  useEffect(()=>{
+    if(token == ''){
+      alert("Você precisa estar logado")
+      navigate("/login")
     }
   }, [token])
 
-  async function getTemas() {
-    await busca('/temas', setTemas, {
+
+  async function getTema(){
+    await busca("/temas", setTemas, {
       headers: {
-        Authorization: token
+        'Authorization': token
       }
     })
   }
 
+
   useEffect(()=>{
-    getTemas()
+    getTema()
   }, [temas.length])
 
   return (
     <>
-      {temas.map(tema => (
-        <Box m={2} >
+    {
+      temas.map(tema =>(
+      <Box m={2} >
         <Card variant="outlined">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
@@ -48,7 +55,7 @@ function ListaTemas() {
           <CardActions>
             <Box display="flex" justifyContent="center" mb={1.5} >
 
-              <Link to={`/editarTema/${tema.id}`} className="text-decorator-none">
+              <Link to={`/formularioTema/${tema.id}`} className="text-decorator-none">
                 <Box mx={1}>
                   <Button variant="contained" className="marginLeft" size='small' color="primary" >
                     atualizar
@@ -66,9 +73,11 @@ function ListaTemas() {
           </CardActions>
         </Card>
       </Box>
-        ))}
+      ))
+      }
     </>
-  )
+  );
 }
 
-export default ListaTemas
+
+export default ListaTemas;
