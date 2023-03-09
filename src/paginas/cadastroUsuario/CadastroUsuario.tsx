@@ -15,14 +15,12 @@ function CadastroUsuario() {
         id: 0,
         nome: '',
         usuario: '',
-        foto: '',
         senha: ''
     })
     const [userResult, setUserResult] = useState<Usuario>({
         id: 0,
         nome: '',
         usuario: '',
-        foto: '',
         senha: ''
     })
 
@@ -68,11 +66,10 @@ function CadastroUsuario() {
                         <Typography variant='h3' align='center'>Cadastre-se</Typography>
                         <TextField value={user.nome} onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)} label='Nome' id='nome' name='nome' variant='outlined' fullWidth margin='normal' />
                         <TextField value={user.usuario} onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)} label='usuario' id='usuario' name='usuario' variant='outlined' fullWidth margin='normal' />
-                        <TextField value={user.foto} onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)} label='foto' id='foto' name='foto' variant='outlined' fullWidth margin='normal' />
                         <TextField value={user.senha} onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)} type='password' label='senha' id='senha' name='senha' variant='outlined' fullWidth margin='normal' />
                         <TextField value={confirmarSenha} onChange={(event: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(event)} type='password' label='confirmar senha' id='confirmarsenha' name='confirmarsenha' variant='outlined' fullWidth margin='normal' />
                         <Grid container justifyContent='space-around'>
-                            <Link to='/login'><Button variant='contained' color='secondary'>Cancelar</Button></Link>
+                            <Link to='/login'><Button variant='contained' color='primary'>Cancelar</Button></Link>
                             <Button type='submit' variant='contained' color='primary'>Cadastrar</Button>
                         </Grid>
                     </form>

@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Box } from '@mui/material';
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
 import UsuarioLogin from '../../models/UsuarioLogin';
 import { login } from '../../services/Service';
@@ -75,7 +75,7 @@ function Login() {
               
                 <Button type="submit" variant="contained" color="primary">
                   Logar
-                </Button>
+                </Button> 
               
             </Box>
           </form>
@@ -96,7 +96,7 @@ function Login() {
       <Grid
         xs={6}
         style={{
-          backgroundImage: `url(https://i.imgur.com/d5bMdDJ.jpg)`,
+          backgroundImage: `url(https://i.imgur.com/7EhqwbF.jpeg)`,
           backgroundRepeat: 'no-repeat',
           width: '100vh',
           minHeight: '100vh',
