@@ -8,7 +8,7 @@ import Login from './paginas/Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
 import ListaTemas from './componentes/temas/listaTemas/ListaTemas';
-import ListaPostagens from './componentes/postagens/listaPostagens/ListaPostagens';
+import ListaPostagens from './componentes/postagens/listaPostagens/ListaPostagem';
 import DeletarTema from './componentes/temas/deletarTema/DeletarTema';
 import CadastroTema from './componentes/temas/cadastroTema/CadastroTema';
 
