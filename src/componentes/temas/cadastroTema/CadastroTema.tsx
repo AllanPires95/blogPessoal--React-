@@ -6,6 +6,7 @@ import { buscaId, post, put } from '../../../services/Service';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function CadastroTema() {
   let navigate = useNavigate();
@@ -20,7 +21,16 @@ function CadastroTema() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      toast.info('Você precisa estar logado!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       navigate('/login');
     }
   }, [token]);
@@ -56,10 +66,28 @@ function CadastroTema() {
             Authorization: token,
           },
         });
-        alert('Tema cadastrado com sucesso');
+        toast.success('Tema cadastrado com sucesso!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       } catch {
         // se der ruim, vem pra ca
-        alert('Erro no cadastro, por favor confira o campo de descrição');
+        toast.error('Erro no cadastro, por favor confira os campos!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
     } else {
       try {
@@ -69,10 +97,28 @@ function CadastroTema() {
             Authorization: token,
           },
         });
-        alert('Tema cadastrado com sucesso');
+        toast.success('Tema cadastrado com sucesso!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       } catch {
         // se der ruim, vem pra ca
-        alert('Erro no cadastro, por favor confira o campo de descrição');
+        toast.error('Erro no cadastro, por favor confira os campos!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       }
     }
     back();
