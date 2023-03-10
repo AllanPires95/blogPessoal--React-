@@ -1,7 +1,18 @@
-import { Container, Typography, TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@material-ui/core';
+import {
+  Container,
+  Typography,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+  Button,
+} from '@material-ui/core';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import useLocalStorage from 'react-use-localstorage';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema';
@@ -11,9 +22,9 @@ import { TokenState } from '../../../store/tokens/tokensReducer';
 function CadastroPostagem() {
   let navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const token = useSelector<TokenState, TokenState["token"]>(
+  const token = useSelector<TokenState, TokenState['token']>(
     (state) => state.token
-)
+  );
   const [postagem, setPostagem] = useState<Postagem>({
     id: 0,
     titulo: '',
@@ -82,7 +93,16 @@ function CadastroPostagem() {
             Authorization: token,
           },
         });
-        alert('Postagem atualizada com sucesso');
+        toast.success('Postagem atualizada com sucesso', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          
+          });
       } catch (error) {
         alert('Erro ao atualizar a postagem');
       }
@@ -102,7 +122,7 @@ function CadastroPostagem() {
   }
 
   function back() {
-    navigate('/posts');
+    navigate('/postagens');
   }
 
   return (
@@ -118,7 +138,9 @@ function CadastroPostagem() {
         </Typography>
         <TextField
           value={postagem.titulo}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            updateModel(event)
+          }
           id="titulo"
           label="titulo"
           variant="outlined"
@@ -128,7 +150,9 @@ function CadastroPostagem() {
         />
         <TextField
           value={postagem.texto}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            updateModel(event)
+          }
           id="texto"
           label="texto"
           name="texto"
@@ -137,7 +161,7 @@ function CadastroPostagem() {
           fullWidth
         />
 
-        <FormControl>
+        <FormControl fullWidth>
           <InputLabel id="demo-simple-select-helper-label">Tema </InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -155,7 +179,12 @@ function CadastroPostagem() {
             ))}
           </Select>
           <FormHelperText>Escolha um tema para a postagem</FormHelperText>
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={tema.id === 0}
+          >
             Finalizar
           </Button>
         </FormControl>

@@ -1,92 +1,91 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography} from '@material-ui/core';
-import {Box} from '@mui/material';
-import { Link } from 'react-router-dom';
-import {useNavigate } from 'react-router-dom'
-
-
-import './Navbar.css'
-import { useSelector } from 'react-redux';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Box } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
+import useLocalStorage from 'react-use-localstorage';
+import { useDispatch, useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 import { addToken } from '../../../store/tokens/action';
 
 function Navbar() {
-    
-    let navigate = useNavigate();
-    const token = useSelector<TokenState, TokenState["token"]>(
-        (state) => state.token
-    )
-    function goLogout(){
-        dispatch(addToken(''));
-        alert("Usuário deslogado")
-       navigate('/login')
-    }
+  let dispatch = useDispatch()
+  const token = useSelector<TokenState, TokenState['token']>(
+    (state) => state.token
+  );
+  let navigate = useNavigate();
 
-    var navbarComponents;
+  function goLogout() {
+    dispatch(addToken(''))
+    alert('Usuário deslogado');
+    navigate('/login');
+  }
 
-    if( token !=''){
-        navbarComponents =  <AppBar position="static">
-        <Toolbar variant="dense" className='estilo'>
-            <Box className='cursor'>                    
-                <Typography variant="h5" color="inherit">
-                    BlogPessoal
-                </Typography>
+
+  let navbarComponent
+
+  if(token !== '') {
+    navbarComponent = (
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Box style={{ cursor: 'pointer' }}>
+            <Typography variant="h5" color="inherit">
+              BlogPessoal
+            </Typography>
+          </Box>
+
+          <Box
+            display="flex"
+            width="100%"
+            justifyContent="space-between"
+            className="navbarLink"
+          >
+            <Box display="flex">
+              <Box mx={1} style={{ cursor: 'pointer' }}>
+                <Link to="/home">
+                  <Typography variant="h6" color="inherit">
+                    home
+                  </Typography>
+                </Link>
+              </Box>
+              <Box mx={1} style={{ cursor: 'pointer' }}>
+                <Link to="/postagens">
+                  <Typography variant="h6" color="inherit">
+                    postagens
+                  </Typography>
+                </Link>
+              </Box>
+              <Box mx={1} style={{ cursor: 'pointer' }}>
+                <Link to="/temas">
+                  <Typography variant="h6" color="inherit">
+                    temas
+                  </Typography>
+                </Link>
+              </Box>
+              <Box mx={1} style={{ cursor: 'pointer' }}>
+                <Link to="/cadastrarTema">
+                  <Typography variant="h6" color="inherit">
+                    cadastrar tema
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
-
-            <Box display="flex" justifyContent="start">
-                <Link to="/home" className="text-decorator-none">
-                    <Box mx={1} className='cursor'>
-                        <Typography variant="h6" color="inherit">
-                            home
-                        </Typography>
-                    </Box>
-                </Link>
-                <Link to="/posts" className="text-decorator-none">
-                    <Box mx={1} className='cursor'>
-                        <Typography variant="h6" color="inherit">
-                            postagens
-                        </Typography>
-                    </Box>
-                </Link>
-                <Link to="/temas" className="text-decorator-none">
-                <Box mx={1} className='cursor'>
-                    <Typography variant="h6" color="inherit">
-                        temas
-                    </Typography>
-                </Box>
-                </Link>
-                <Link to="/formularioTema" className="text-decorator-none">
-                <Box mx={1} className='cursor'>
-                    <Typography variant="h6" color="inherit">
-                        cadastrar tema
-                    </Typography>
-                </Box>
-                </Link>
-              
-                    <Box mx={1} className='cursor' onClick={goLogout}>
-                        <Typography variant="h6" color="inherit">
-                            logout
-                        </Typography>
-                    </Box>
-                
+            <Box mx={1} style={{ cursor: 'pointer' }} onClick={goLogout}>
+              <Typography variant="h6" color="inherit">
+                logout
+              </Typography>
             </Box>
-
+          </Box>
         </Toolbar>
-     </AppBar>
-
-
-    }
-
-    return (
-        <>
-        {navbarComponents}
-
-        </>
+      </AppBar>
     )
+  }
+
+  return (
+    <>
+      {navbarComponent}
+    </>
+  );
 }
 
 export default Navbar;
-
-function dispatch(arg0: { type: string; payload: string; }) {
-    throw new Error('Function not implemented.');
-}

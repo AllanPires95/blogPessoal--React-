@@ -3,16 +3,19 @@ import TextField from '@material-ui/core/TextField';
 import { Box } from '@mui/material';
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import useLocalStorage from 'react-use-localstorage';
 import UsuarioLogin from '../../models/UsuarioLogin';
 import { login } from '../../services/Service';
 import { addToken } from '../../store/tokens/action';
 
 
 function Login() {
-  let navigate = useNavigate();
-  const dispatch = useDispatch;
+  let navigate = useNavigate()
   const [token, setToken] = useState('')
+  const dispatch = useDispatch()
+
   const [userLogin, setUserLogin] = useState<UsuarioLogin>({
     id: 0,
     nome: '',
@@ -33,16 +36,29 @@ function Login() {
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
     try{
-      await login('/usuarios/logar', userLogin, setToken)
-      alert('Usuário logado com sucesso')
+      await login(`/usuarios/logar`, userLogin, setToken)
+      toast.success('🎉Usuário logado com sucesso', {
+        
+        theme: "colored",
+        });
     } catch(error) {
-      alert('Usuário e/ou senha inválidos')
+      toast.warning('🎃Usuário e/ou senha inválidos',{
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        })
     }
   }
 
   useEffect(() => {
-    if(token !== '') {
-         navigate('/home')
+    if(token !== ''){
+      dispatch(addToken(token))
+      navigate('/home')
     }
   }, [token])
 
@@ -77,7 +93,7 @@ function Login() {
               
                 <Button type="submit" variant="contained" color="primary">
                   Logar
-                </Button> 
+                </Button>
               
             </Box>
           </form>
