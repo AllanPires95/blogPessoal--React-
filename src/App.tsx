@@ -12,11 +12,10 @@ import CadastroTema from './componentes/temas/cadastroTema/CadastroTema';
 import DeletarTema from './componentes/temas/deletarTema/DeletarTema';
 import CadastroPostagem from './componentes/postagens/cadastroPostagem/CadastroPostagem';
 import DeletarPostagem from './componentes/postagens/deletarPostagem/DeletarPostagem';
-import { Provider } from 'react-redux';
 import store from './store/store';
-
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
